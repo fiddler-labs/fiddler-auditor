@@ -1,0 +1,47 @@
+name: "Publish"
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+    - name: Install Jupyter
+      run: |
+        which pip
+        which python
+        python -c "import sys; print(sys.executable)"
+        pip install wheel
+        pip install jupyter
+    - name: Install Checklist
+      run: |    
+        pip install --no-build-isolation checklist==0.0.11
+    - name: Install package
+      run: |
+        pip install .[test]
+    - name: Check semantic tag in __init__.py
+      run: |
+        LOCAL_VERSION=$(python -c 'import auditor; print(auditor.__version__);')
+        echo $LOCAL_VERSION
+    - name: Run tests
+      env:
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      run: |
+        make test
+    - name: Publish to PyPI
+      shell: bash
+      env:
+        TWINE_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASSWORD }}
+      run: |
+        pip install twine
+        make build
+        # make publish_test

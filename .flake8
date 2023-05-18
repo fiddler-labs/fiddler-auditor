@@ -1,0 +1,12 @@
+[flake8]
+max-line-length = 80
+per-file-ignores =
+    # for HTML rendering
+    auditor/utils/data.py: E501
+exclude = 
+    ./git,
+    ./docs,
+    ./dist,
+    ./examples,
+    ./proto,
+    ./tests

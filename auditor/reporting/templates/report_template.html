@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Robustness report</title>
+        <!-- <link rel="stylesheet" href="css/pico.min.css"> -->
+        <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+    </head>
+
+    <body>
+        {% set paraphrase_str = 'Paraphrase' %}
+
+        <main class="container">
+            <!-- <img style="display: inline;" src="fiddler-logo.png" alt="logo" height="100px" width="100px" /> -->
+        <h1> <u> Robustness report </u></h1>
+        
+        <h2> Description of the Test Suite: </h2>
+        <p> {{ suite_description }} </p>
+
+        <h2> Summarized results </h2>
+        <figure>
+            <table role="grid">
+                <!-- <table border="1"> -->
+                <tr>
+                    <th>Perturbation Type</th>
+                    <th>No. of perturbations</th>
+                    <th>Expected behavior</th>
+                    <th>Robust Accuracy</th>
+                </tr>
+                {% for summary in summaries %}
+                <TR>
+                    <TD>{{ summary.perturbation_type }}</TD>
+                    <TD>{{ summary.total_perturbations }}</TD>
+                    <TD><SPAN>{{ summary.description }}</SPAN></TD>
+                    <TD><SPAN>{{ "%.4f"|format(summary.robust_accuracy)  }}</SPAN></TD>
+                </TR>
+                    <!-- {{ summary.description}} : {{ summary.results|length }} -->
+                {% endfor %}
+            </table>
+        </figure>
+        
+        <h2> Detailed results </h2>
+        <p> Following section contains detailed results for the perturbation that were applied to the model.  </p>
+        
+        {% for summary in summaries %}
+        <h3> Perturbation type: {{ summary.perturbation_type }} </h3>
+            <p> Description: {{ summary.description }} </p>
+
+            <h4> Failed Perturbations </h4>
+            <figure>
+                <table role="grid">
+                    <!-- <table border="1"> -->
+                    <tr>
+                        <th>Perturbed Input</th>
+                        {% if paraphrase_str in summary.perturbation_type %}
+                            <th>Perturbation - Reference cosine similarity</th>
+                        {% else %}
+                            <th>Perturbation</th>
+                        {% endif %}
+                        <th>Original Input</th>
+                        <th>Result</th>
+                        <!-- <th>Metric</th> -->
+                    </tr>
+                    {% for pset in summary.results %}
+                        {% for r in pset %}
+                            {% if r.result <= 0 %}
+                                <TR>
+                                    <TD>{{ r.input }}</TD>
+                                    <TD>
+                                        {% if r.metadata is not none %}
+                                            {% if paraphrase_str in summary.perturbation_type %}
+                                                {{ r.metadata[0] | round(2) }}
+                                            {% else %}
+                                                {{ r.metadata[0] }}  &#8594; {{ r.metadata[1] }}
+                                            {% endif %}
+                                        {% else %}
+                                            unperturbed-data
+                                        {% endif %}
+                                    </TD>
+                                    <TD>{{ r.original_input }}</TD>
+                                    <TD> 
+                                        {% if r.result > 0 %}
+                                            &#9989;
+                                        {% else %} 
+                                            &#x274C;
+                                        {% endif %}
+                                    </TD>
+                                </TR>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </figure>
+
+            <h4> Passed Perturbations </h4>
+            <figure>
+                <table role="grid">
+                    <!-- <table border="1"> -->
+                    <tr>
+                        <th>Perturbed Input</th>
+                        {% if paraphrase_str in summary.perturbation_type %}
+                            <th>Perturbation - Reference cosine similarity</th>
+                        {% else %}
+                            <th>Perturbation</th>
+                        {% endif %}
+                        <th>Original Input</th>
+                        <th>Result</th>
+                        <!-- <th>Metric</th> -->
+                    </tr>
+                    {% for pset in summary.results %}
+                        {% for r in pset %}
+                            {% if r.result > 0 %}
+                                <TR>
+                                    <TD>{{ r.input }}</TD>
+                                    <TD>
+                                        {% if r.metadata is not none %}
+                                            {% if paraphrase_str in summary.perturbation_type %}
+                                                {{ r.metadata[0] | round(2) }}
+                                            {% else %}
+                                                {{ r.metadata[0] }}  &#8594; {{ r.metadata[1] }}
+                                            {% endif %}
+                                        {% else %}
+                                            unperturbed-data
+                                        {% endif %}
+                                    </TD>
+                                    <TD>{{ r.original_input }}</TD>
+                                    <TD> 
+                                        {% if r.result > 0 %}
+                                            &#9989;
+                                        {% else %} 
+                                            &#x274C;
+                                        {% endif %}
+                                    </TD>
+                                </TR>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+            </figure>
+        {% endfor %}
+
+    </main>
+    </body>
+</html>
