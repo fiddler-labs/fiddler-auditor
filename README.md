@@ -12,15 +12,18 @@ Auditing Large Language Models made easy! 🍰
 
 Language Models are have shown some remarkable emergent capabilities. However, they can hallucinate and generate false and harmful text. Hence, its important to audit them thoroughly. fiddler-auditor allows you to test Language models for your use-case before deploying them to production.
 
+
 ## 📰 Features
-- Support for both Generative and Discriminative NLP models
 - Support for automatic test-case generation
-- Integration with LangChain 
+- Integration with LangChain
+- Support for both Generative and Discriminative NLP models
+- Compare LLMs (Upcoming)
+
 
 ## 🚀 Quick-start guides
-- [Evaluate Prompt Robustness](https://docs.fiddler.ai)
-- [Evaluate NLP Classifier Robustness](https://docs.fiddler.ai)
-- [Compare Two LLMs](https://docs.fiddler.ai)
+- [Evaluate LLM Correctness and Robustness](examples/LLM_Evaluation.ipynb)
+- How to add custom methods to evaluate models. 
+
 
 ## 📖 Documentation
 - [Website](https://docs.fiddler.ai)
