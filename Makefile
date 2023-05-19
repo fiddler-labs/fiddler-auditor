@@ -12,6 +12,9 @@ lint:
 publish_test:
 	python3 -m twine upload --non-interactive --repository-url https://test.pypi.org/legacy/ dist/*
 
+publish:
+	python3 -m twine upload --non-interactive dist/*
+
 build_docs:
 	cp examples/LLM_Evaluation.ipynb docs/source/
 	cd docs/ && $(MAKE) clean html
