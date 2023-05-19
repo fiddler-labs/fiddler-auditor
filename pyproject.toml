@@ -11,8 +11,7 @@ authors = [
 description = "Auditing large language models made easy."
 readme = "README.md"
 requires-python = ">=3.7.12,<4.0"
-license = "Elastic License 2.0 (ELv2)"
-repository = https://github.com/fiddler-labs/fiddler-auditor
+
 
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -28,14 +27,20 @@ dependencies = [
     "sentence-transformers>=2.2.2",
 ]
 
+[project.license]
+text = "Elastic License 2.0 (ELv2)"
+
+[project.urls]
+repository = "https://github.com/fiddler-labs/fiddler-auditor"
+
 [project.optional-dependencies]
 test =[
   "pytest",
 ]
 
 [tool.setuptools.package-data]
-"modelauditor.assets.data" = ["*.csv", "*.txt"]
-"modelauditor.reporting.templates" = ["report_template.html"]
+"auditor.assets.data" = ["*.csv", "*.txt"]
+"auditor.reporting.templates" = ["report_template.html"]
 
 [tool.setuptools.packages.find]
 include = ["auditor*"]
