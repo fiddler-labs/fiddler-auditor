@@ -42,10 +42,11 @@ jobs:
     - name: Build and Publish to PyPI
       shell: bash
       env:
-        TWINE_USERNAME: ${{ secrets.TESTPYPI_USERNAME }}
-        TWINE_PASSWORD: ${{ secrets.TESTPYPI_PASSWORD }}
+        TWINE_USERNAME: ${{ secrets.TWINE_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.TWINE_PASSWORD }}
       run: |
         pip install twine
         pip install build
         make clean build
-        make publish_test
+        # make publish_test
+        make publish
