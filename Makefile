@@ -17,5 +17,6 @@ build_docs:
 	cd docs/ && $(MAKE) clean html
 clean:
 	rm -rf dist/*
+	rm -rf build/
 
 all: test clean build build_docs
