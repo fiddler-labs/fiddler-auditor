@@ -47,4 +47,4 @@ jobs:
       run: |
         pip install twine
         make clean build
-        # make publish_test
+        make publish_test
