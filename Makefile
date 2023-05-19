@@ -10,7 +10,7 @@ lint:
 	flake8 .
 
 publish_test:
-	python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+	python3 -m twine upload --non-interactive --repository-url https://test.pypi.org/legacy/ dist/*
 
 build_docs:
 	cp examples/LLM_Evaluation.ipynb docs/source/

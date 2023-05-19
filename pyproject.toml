@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fiddler-auditor"
-version = "0.0.1.rc2"
+version = "0.0.1.rc3"
 authors = [
   { name="Fiddler Labs", email="support@fiddler.ai" },
 ]
