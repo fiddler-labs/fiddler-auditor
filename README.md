@@ -10,14 +10,18 @@ Auditing Large Language Models made easy! 🍰
 
 ## 🔬 What is Fiddler-Auditor
 
-Language Models are have shown some remarkable emergent capabilities. However, they can hallucinate and generate false and harmful text. Hence, its important to audit them thoroughly. fiddler-auditor allows you to test Language models for your use-case before deploying them to production.
+Language models enable companies to build and launch innovative applications to make their workforce smarter and increase customer satisfaction. 
+However, it’s been known that LLMs can hallucinate, generate adversarial responses that can harm users, and even expose private information that they were trained on when prompted or unprompted. It's more critical than ever for ML and software application teams to minimize these risks and weaknesses before launching LLMs and NLP models. As a result, it’s important for you to include a process to audit language models thoroughly before production.
+The Fiddler Auditor enables you to test LLMs and NLP models, identify weaknesses in the models, and mitigate potential adversarial outcomes before deploying them to production.
 
+## 📰 Features and Capabilities
+The Fiddler Auditor supports
 
-## 📰 Features
-- Support for automatic test-case generation
+- Automatic prompt perturbation
 - Integration with LangChain
-- Support for both Generative and Discriminative NLP models
-- Compare LLMs (Upcoming)
+- Custom evaluation metrics
+- Generative and Discriminative NLP models
+- Comparison of LLMs (Upcoming)
 
 
 ## 🚀 Quick-start guides
@@ -30,4 +34,16 @@ Language Models are have shown some remarkable emergent capabilities. However, t
 
 
 ## 🙋‍♀ Contribution
-We are rapidly evolving this library and would love for you to contribute. Just fork and send us a PR! 
+Contributions to Fiddler Auditor are welcomed! We are continuously updating this library to support language models as they evolve. 
+If you have feedback regarding this library, feel free to raise issues in this repository.
+Enjoy using Fiddler Auditor? Give us a star on GitHub!
+
+## Community
+- Join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
+- Visit the [Fiddler Resources Library](https://www.fiddler.ai/resources)
+- Leave a star in our [GitHub](https://github.com/fiddler-labs/fiddler-auditor)
+- Follow us on [Twitter](https://twitter.com/fiddlerlabs)
+- Subscribe to our [blog](https://www.fiddler.ai/blog#subscribe)
+- [Sign-up to try Fiddler](https://www.fiddler.ai/trial)
+
+
