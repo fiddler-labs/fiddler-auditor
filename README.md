@@ -34,14 +34,15 @@ The Fiddler Auditor supports
 
 
 ## 🙋‍♀ Contribution
-Contributions to Fiddler Auditor are welcomed! We are continuously updating this library to support language models as they evolve. 
-If you have feedback regarding this library, feel free to raise issues in this repository.
-Enjoy using Fiddler Auditor? Give us a star on GitHub!
+We are continuously updating this library to support language models as they evolve. 
+
+- Contributions in the form of suggestions and PRs to Fiddler Auditor are welcome!
+- If you have feedback regarding this library, feel free to raise issues in this repository.
 
 ## Community
 - Join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
 - Visit the [Fiddler Resources Library](https://www.fiddler.ai/resources)
-- Leave a star in our [GitHub](https://github.com/fiddler-labs/fiddler-auditor)
+- Enjoy using Fiddler Auditor? Leave us a star on [GitHub](https://github.com/fiddler-labs/fiddler-auditor)
 - Follow us on [Twitter](https://twitter.com/fiddlerlabs)
 - Subscribe to our [blog](https://www.fiddler.ai/blog#subscribe)
 - [Sign-up to try Fiddler](https://www.fiddler.ai/trial)
