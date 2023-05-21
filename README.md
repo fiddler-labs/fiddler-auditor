@@ -4,11 +4,13 @@ Auditing Large Language Models made easy! 🍰
 [![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
 [![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml)
 
-## 📦 Installation
-
-`pip install fiddler-auditor`
 
 ## 🔬 What is Fiddler Auditor
+
+<div align="left">
+    <img src="docs/source/images/monitoring-generative-ai-models_fiddler-auditor.png"
+         alt="Fiddler Auditor Capabilities" width="200"/>
+</div>
 
 Language models enable companies to build and launch innovative applications to make their workforce smarter and increase customer satisfaction. 
 However, it’s been known that LLMs can hallucinate, generate adversarial responses that can harm users, and even expose private information that they were trained on when prompted or unprompted. It's more critical than ever for ML and software application teams to minimize these risks and weaknesses before launching LLMs and NLP models. As a result, it’s important for you to include a process to audit language models thoroughly before production.
@@ -23,6 +25,14 @@ Fiddler Auditor supports
 - Generative and Discriminative NLP models
 - Comparison of LLMs (Upcoming)
 
+<div align="left">
+    <img src="docs/source/images/fiddler-auditor-prompt-evaluation.png"
+         alt="Example Report" width="200"/>
+</div>
+
+## 📦 Installation
+
+`pip install fiddler-auditor`
 
 ## 🚀 Quick-start guides
 - [Evaluate LLM Correctness and Robustness](examples/LLM_Evaluation.ipynb)
