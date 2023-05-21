@@ -9,7 +9,7 @@ Auditing Large Language Models made easy! 🍰
 
 <div align="left">
     <img src="docs/source/images/monitoring-generative-ai-models_fiddler-auditor.png"
-         alt="Fiddler Auditor Capabilities" width="200"/>
+         alt="Fiddler Auditor Capabilities"/>
 </div>
 
 Language models enable companies to build and launch innovative applications to make their workforce smarter and increase customer satisfaction. 
@@ -27,7 +27,7 @@ Fiddler Auditor supports
 
 <div align="left">
     <img src="docs/source/images/fiddler-auditor-prompt-evaluation.png"
-         alt="Example Report" width="200"/>
+         alt="Example Report"/>
 </div>
 
 ## 📦 Installation
