@@ -1,4 +1,4 @@
-from typing import List, Optional, Literal
+from typing import List, Optional, Literal, Dict
 
 from langchain.llms.base import BaseLLM
 
@@ -184,7 +184,7 @@ class LLMEval:
         else:
             return perturbed_dataset.data[0][1:]
 
-    def _get_generation_details(self) -> dict[str, str]:
+    def _get_generation_details(self) -> Dict[str, str]:
         """Returns generation related details"""
         details = {}
         if hasattr(self.llm, '_llm_type'):
