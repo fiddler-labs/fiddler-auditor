@@ -1,2 +1,2 @@
 """module entrypoint"""
-__version__ = '0.0.1.rc0'
+__version__ = '0.0.1.rc1'
