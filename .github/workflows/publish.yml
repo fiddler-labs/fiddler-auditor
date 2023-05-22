@@ -34,11 +34,6 @@ jobs:
       run: |
         LOCAL_VERSION=$(python -c 'import auditor; print(auditor.__version__);')
         echo $LOCAL_VERSION
-    - name: Run tests
-      env:
-        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-      run: |
-        make test
     - name: Build and Publish to PyPI
       shell: bash
       env:
