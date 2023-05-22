@@ -169,7 +169,7 @@ class LLMEvalResult:
         expected_behavior_desc: str,
         evaluation_type: Literal[LLMEvalType.robustness, LLMEvalType.correctness],  # noqa: E501
         reference_generation: Optional[str] = None,
-        generation_kwargs: Optional[dict[str, str]] = None,
+        generation_kwargs: Optional[Dict[str, str]] = None,
     ) -> None:
         self.original_prompt = original_prompt
         self.pre_context = pre_context
@@ -225,7 +225,7 @@ class LLMEvalResult:
         perturbed_generations: List[str],
         test_result: List[int],
         metric: List[Dict[str, Any]],
-        generation_kwargs: Optional[dict[str, str]] = None,
+        generation_kwargs: Optional[Dict[str, str]] = None,
         expected_behavior_desc: Optional[str] = None,
     ) -> str:
         # report type
