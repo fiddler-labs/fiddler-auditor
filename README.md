@@ -36,7 +36,7 @@ Fiddler Auditor supports
 
 ## 🚀 Quick-start guides
 - [Evaluate LLM Correctness and Robustness](examples/LLM_Evaluation.ipynb)
-- How to add custom methods to evaluate models. 
+- [Evaluate LLMs with custom metrics](examples/Custom_Evaluation.ipynb)
 
 
 ## 📖 Documentation
