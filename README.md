@@ -1,4 +1,4 @@
-# ![Auditor Logo](https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-logo.png?raw=true)
+# <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-logo.png" width="60%" alt="Fiddler Auditor">
 
 Auditing Large Language Models made easy!
 
@@ -42,19 +42,18 @@ or you can install from source after cloning the repo using the following comman
 
 ## Quick-start guides
 - [Evaluate LLM Correctness and Robustness](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
-- [Evaluate LLMs with custom metrics](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
+- [Evaluate LLMs with custom metrics](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb)
 
 
 ## Contribution
 We are continuously updating this library to support language models as they evolve. 
 
 - Contributions in the form of suggestions and PRs to Fiddler Auditor are welcome!
-- If you have feedback regarding this library, feel free to raise issues in this repository.
+- If you encounter a bug, please feel free to raise issues in this repository.
 
 ## Community
-- Join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
-- Visit the [Fiddler Resources Library](https://www.fiddler.ai/resources)
-- Enjoy using Fiddler Auditor? Leave us a star on [GitHub](https://github.com/fiddler-labs/fiddler-auditor)
-- Follow us on [Twitter](https://twitter.com/fiddlerlabs)
-- Subscribe to our [blog](https://www.fiddler.ai/blog#subscribe)
-- [Sign-up to try Fiddler](https://www.fiddler.ai/trial)
+- For questions and support, join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
+- Discover the latest guides, videos, and research with the [Fiddler Resources Library](https://www.fiddler.ai/resources)
+- Stay informed by following us on [Twitter](https://twitter.com/fiddlerlabs)
+- Subscribe to our [monthly newsletter](https://www.fiddler.ai/blog#subscribe)
+- [Try Fiddler for free](https://www.fiddler.ai/trial)
