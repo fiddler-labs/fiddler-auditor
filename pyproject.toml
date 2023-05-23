@@ -10,7 +10,7 @@ authors = [
 ]
 description = "Auditing large language models made easy."
 readme = "README.md"
-requires-python = ">=3.9.1,<4.0"
+requires-python = ">=3.10.1,<4.0"
 
 
 classifiers = [
