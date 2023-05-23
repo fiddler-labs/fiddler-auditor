@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "fiddler-auditor"
-version = "0.0.1.rc1"
+version = "0.0.1.rc2"
 authors = [
   { name="Fiddler Labs", email="support@fiddler.ai" },
 ]
 description = "Auditing large language models made easy."
 readme = "README.md"
-requires-python = ">=3.8.1,<4.0"
+requires-python = ">=3.10.1,<4.0"
 
 
 classifiers = [
@@ -22,8 +22,8 @@ dependencies = [
     "pandas >=1.3.5,<2.0",
     "spacy-transformers >=1.1.8",
     "jinja2==3.1.2",
-    "langchain>=0.0.158",
-    "openai>=0.27.0",
+    "langchain >=0.0.158",
+    "openai >=0.27.0",
     "sentence-transformers>=2.2.2",
 ]
 
