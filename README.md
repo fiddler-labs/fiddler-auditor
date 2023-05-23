@@ -1,4 +1,4 @@
-# ![Auditor Logo](https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-logo.png)
+# ![Auditor Logo](https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-logo.png?raw=true)
 
 Auditing Large Language Models made easy!
 
@@ -9,7 +9,7 @@ Auditing Large Language Models made easy!
 ## What is Fiddler Auditor?
 
 <div align="left">
-    <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/monitoring-generative-ai-models_fiddler-auditor.png"
+    <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/monitoring-generative-ai-models_fiddler-auditor.png?raw=true"
          alt="Fiddler Auditor Capabilities"/>
 </div>
 
@@ -27,7 +27,7 @@ Fiddler Auditor supports
 - Comparison of LLMs (Upcoming)
 
 <div align="left">
-    <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-prompt-evaluation.png"
+    <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-prompt-evaluation.png?raw=true"
          alt="Example Report"/>
 </div>
 
