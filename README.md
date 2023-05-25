@@ -46,8 +46,7 @@ Fiddler Auditor supports
 ## Installation
 
 ### Fom PyPI
-Auditor is available on pypi and we test on Python 3.8 and above. Install using
-the following command
+Auditor is available on PyPI and we test on Python 3.8 and above. We recommend creating a virtual python environment and installing using the following command
 
 ```bash
 pip install fiddler-auditor
