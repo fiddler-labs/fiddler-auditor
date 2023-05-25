@@ -24,7 +24,7 @@ Fiddler Auditor supports
 - Integration with LangChain
 - Custom evaluation metrics
 - Generative and Discriminative NLP models
-- Comparison of LLMs (Upcoming)
+- Comparison of LLMs
 
 <div align="left">
     <img src="https://github.com/fiddler-labs/fiddler-auditor/blob/main/docs/source/images/fiddler-auditor-prompt-evaluation.png?raw=true"
@@ -32,13 +32,18 @@ Fiddler Auditor supports
 </div>
 
 ## Installation
-Auditor is available on pypi.
+Auditor is available on pypi and we test on Python 3.8 and above. We recommend
+using installation inside a virtual environment using the following command.
 
-`pip install fiddler-auditor`
+```bash
+pip install fiddler-auditor
+```
 
 or you can install from source after cloning the repo using the following command
 
-`pip install .`
+```bash
+pip install .
+```
 
 ## Quick-start guides
 - [Evaluate LLM Correctness and Robustness](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
