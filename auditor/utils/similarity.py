@@ -29,4 +29,4 @@ def compute_similarity(
         convert_to_tensor=True
     )
     score = sent_util.cos_sim(ref_emb, perturbed_emb)
-    return score.numpy()[0][0]
+    return score.cpu().numpy()[0][0]
