@@ -17,6 +17,7 @@ publish:
 
 build_docs:
 	cp examples/LLM_Evaluation.ipynb docs/source/
+	cp examples/LLM_Evaluation_Azure.ipynb docs/source/
 	cd docs/ && $(MAKE) clean html
 clean:
 	rm -rf dist/*

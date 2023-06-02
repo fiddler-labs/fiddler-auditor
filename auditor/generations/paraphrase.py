@@ -31,7 +31,7 @@ def generate_similar_sentences(
     if api_key is None:
         api_key = os.getenv("OPENAI_API_KEY")
     openai.api_key = api_key
-    
+
     engine = None
     if openai.api_type == "azure":
         engine = model
