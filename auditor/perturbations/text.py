@@ -3,6 +3,7 @@ Perturbations for text inputs
 """
 import logging
 import enum
+import random
 from typing import List, Optional, Callable
 from tqdm import tqdm
 import re
@@ -19,6 +20,8 @@ from auditor.utils.similarity import (
     load_similarity_model,
     compute_similarity
 )
+from auditor.utils.misc import simulate_typos
+
 COUNTRIES = [x.lower() for x in Perturb.data['country']]
 CITIES = [x.lower() for x in Perturb.data['city']]
 
@@ -31,6 +34,7 @@ class PerturbationType(enum.Enum):
     perturb_names = 'Names'
     perturb_location = 'Locations'
     perturb_number = 'Numbers'
+    pertrub_typos = 'Typos'
     paraphrase = 'Paraphrase'
 
     def __str__(self) -> str:
@@ -252,6 +256,40 @@ class PerturbText:
             original_dataset_size=len(self.data),
             perturbation_type=PerturbationType.perturb_number,
         )
+
+    def perturb_typos(
+            self,
+            typo_probability : float = 0.02
+    ) -> PerturbedTextDataset:
+        """Perturb the dataset by introducing simulated user typos
+
+        Args:
+            temprature: rate of errors
+
+        Returns:
+            PerturbedTextDataset: Perturbed dataset object
+        """
+
+        LOG.info("Perturbing user typos in the dataset.")
+
+        perturbed_dataset = []
+        total_perturbations = 0
+        for sentence in self.data:
+            similar_sentences = []
+            for i in range(0, self.perturbations_per_sample):
+                similar_sentences.append(simulate_typos(sentence, typo_probability))
+            perturbed_dataset.append([sentence] + similar_sentences)
+            total_perturbations += len(similar_sentences)
+
+        return PerturbedTextDataset(
+            data=perturbed_dataset,
+            metadata=None,
+            total_perturbations=total_perturbations,
+            original_dataset_size=len(self.data),
+            perturbations_per_sample=self.perturbations_per_sample,
+            perturbation_type=PerturbationType.pertrub_typos,
+        )
+
 
     def paraphrase(
         self,
