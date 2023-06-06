@@ -4,38 +4,38 @@ import random
 
 # nearby keys on a QWERTY keyboard
 KEYS_MAP = {
-    'a': ['q','w','s','x','z'],
-    'b': ['v','g','h','n'],
-    'c': ['x','d','f','v'],
-    'd': ['s','e','r','f','c','x'],
-    'e': ['w','s','d','r'],
-    'f': ['d','r','t','g','v','c'],
-    'g': ['f','t','y','h','b','v'],
-    'h': ['g','y','u','j','n','b'],
-    'i': ['u','j','k','o'],
-    'j': ['h','u','i','k','n','m'],
-    'k': ['j','i','o','l','m'],
-    'l': ['k','o','p'],
-    'm': ['n','j','k','l'],
-    'n': ['b','h','j','m'],
-    'o': ['i','k','l','p'],
-    'p': ['o','l'],
-    'q': ['w','a','s'],
-    'r': ['e','d','f','t'],
-    's': ['w','e','d','x','z','a'],
-    't': ['r','f','g','y'],
-    'u': ['y','h','j','i'],
-    'v': ['c','f','g','v','b'],
-    'w': ['q','a','s','e'],
-    'x': ['z','s','d','c'],
-    'y': ['t','g','h','u'],
-    'z': ['a','s','x'],
+    'a': ['q', 'w', 's', 'x', 'z'],
+    'b': ['v', 'g', 'h', 'n'],
+    'c': ['x', 'd', 'f', 'v'],
+    'd': ['s', 'e', 'r', 'f', 'c', 'x'],
+    'e': ['w', 's', 'd', 'r'],
+    'f': ['d', 'r', 't', 'g', 'v', 'c'],
+    'g': ['f', 't', 'y', 'h', 'b', 'v'],
+    'h': ['g', 'y', 'u', 'j', 'n', 'b'],
+    'i': ['u', 'j', 'k', 'o'],
+    'j': ['h', 'u', 'i', 'k', 'n', 'm'],
+    'k': ['j', 'i', 'o', 'l', 'm'],
+    'l': ['k', 'o', 'p'],
+    'm': ['n', 'j', 'k', 'l'],
+    'n': ['b', 'h', 'j', 'm'],
+    'o': ['i', 'k', 'l', 'p'],
+    'p': ['o', 'l'],
+    'q': ['w', 'a', 's'],
+    'r': ['e', 'd', 'f', 't'],
+    's': ['w', 'e', 'd', 'x', 'z', 'a'],
+    't': ['r', 'f', 'g', 'y'],
+    'u': ['y', 'h', 'j', 'i'],
+    'v': ['c', 'f', 'g', 'v', 'b'],
+    'w': ['q', 'a', 's', 'e'],
+    'x': ['z', 's', 'd', 'c'],
+    'y': ['t', 'g', 'h', 'u'],
+    'z': ['a', 's', 'x'],
 }
 
 
 def round_list(nums: List[float], precision=2):
     return [round(n, precision) for n in nums]
-    
+
 
 def simulate_typos(sentence: str, typo_probability: float) -> str:
 
@@ -58,8 +58,8 @@ def simulate_typos(sentence: str, typo_probability: float) -> str:
             typo_array = KEYS_MAP[char] + [char, None]
             typo_selection = random.choice(typo_array)
             if typo_selection is not None:
-                outputList.append(typo_selection)  
+                outputList.append(typo_selection)
         else:
-            outputList.append(char) 
+            outputList.append(char)
 
     return ''.join(outputList)

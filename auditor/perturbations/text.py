@@ -3,7 +3,6 @@ Perturbations for text inputs
 """
 import logging
 import enum
-import random
 from typing import List, Optional, Callable
 from tqdm import tqdm
 import re
@@ -259,7 +258,7 @@ class PerturbText:
 
     def perturb_typos(
             self,
-            typo_probability : float = 0.02
+            typo_probability: float = 0.02
     ) -> PerturbedTextDataset:
         """Perturb the dataset by introducing simulated user typos
 
@@ -277,7 +276,12 @@ class PerturbText:
         for sentence in self.data:
             similar_sentences = []
             for i in range(0, self.perturbations_per_sample):
-                similar_sentences.append(simulate_typos(sentence, typo_probability))
+                similar_sentences.append(
+                    simulate_typos(
+                        sentence,
+                        typo_probability
+                    )
+                )
             perturbed_dataset.append([sentence] + similar_sentences)
             total_perturbations += len(similar_sentences)
 
@@ -289,7 +293,6 @@ class PerturbText:
             perturbations_per_sample=self.perturbations_per_sample,
             perturbation_type=PerturbationType.pertrub_typos,
         )
-
 
     def paraphrase(
         self,
