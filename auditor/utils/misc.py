@@ -1,4 +1,5 @@
 """For miscellaneous utilities"""
+import math
 from typing import List
 import random
 
@@ -43,13 +44,20 @@ def simulate_typos(sentence: str, typo_probability: float) -> str:
     charList = list(sentence)
     outputList = []
 
-    # the number of characters that will be typos
-    n_chars_to_flip = round(len(charList) * typo_probability)
+    # the positions of eligible of characters that can have typos
+    eligible_positions=[]
+    for pos in range(0, len(charList)):
+        if charList[pos] in KEYS_MAP:
+           eligible_positions.append(pos) 
+    
+    n_chars_to_flip = math.ceil(len(charList) * typo_probability)
 
     # list of characters that will be flipped
     pos_to_flip = []
     for i in range(n_chars_to_flip):
-        pos_to_flip.append(random.randint(0, len(charList) - 1))
+        rand_pos = random.choice(eligible_positions)
+        pos_to_flip.append(rand_pos)
+        eligible_positions.remove(rand_pos)
 
     # insert typos
     for pos in range(0, len(charList)):
