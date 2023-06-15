@@ -2,8 +2,8 @@
 
 Auditing Large Language Models made easy!
 
-[![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
-[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml)
+<!-- [![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
+[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml) -->
 
 
 ## What is Fiddler Auditor?
@@ -45,7 +45,7 @@ Fiddler Auditor supports
 
 ## Installation
 
-### Fom PyPI
+### From PyPI
 Auditor is available on PyPI and we test on Python 3.8 and above. We recommend creating a virtual python environment and installing using the following command
 
 ```bash
