@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import os
 import openai
 
@@ -16,6 +16,7 @@ def generate_similar_sentences(
     model: str = OPENAI_CHAT_COMPLETION,
     num_sentences: int = 5,
     temperature: float = 0.0,
+    api_version: Optional[str] = None,
 ) -> List[str]:
     prompt = SIMILAR_SENTENCES_PROMPT.format(
         n=num_sentences,
@@ -30,10 +31,18 @@ def generate_similar_sentences(
     if api_key is None:
         api_key = os.getenv("OPENAI_API_KEY")
     openai.api_key = api_key
+
+    engine = None
+    if openai.api_type == "azure":
+        engine = model
+        api_version = api_version
+
     response = openai.ChatCompletion.create(
       model=model,
       messages=payload,
       temperature=temperature,
+      engine=engine,
+      api_version=api_version
     )
     return _process_similar_sentence_reponse(response)
 
