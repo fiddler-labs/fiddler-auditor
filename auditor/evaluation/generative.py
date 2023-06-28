@@ -1,5 +1,4 @@
 from typing import List, Optional, Literal, Dict
-from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
 
 from langchain.llms.base import BaseLLM
 
@@ -11,7 +10,6 @@ from auditor.evaluation.expected_behavior import (
     SimilarGeneration,
 )
 from auditor.utils.logging import get_logger
-from auditor.perturbations.text import PerturbText
 from auditor.perturbations import Paraphrase
 from auditor.perturbations.base import AbstractPerturbation
 
@@ -181,7 +179,6 @@ class LLMEval:
             *args,
             **kwargs,
         )
-        
 
     def _get_generation_details(self) -> Dict[str, str]:
         """Returns generation related details"""
