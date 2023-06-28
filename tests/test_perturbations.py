@@ -49,9 +49,9 @@ class TestPerturbText(unittest.TestCase):
 
 class TestParaphrase(unittest.TestCase):
     def setUp(self) -> None:
-        self.num_sentences = 4
+        self.num_perturbations = 4
         self.perturber = Paraphrase(
-            num_sentences=self.num_sentences,
+            num_perturbations=self.num_perturbations,
             temperature=0.1,
         )
         return
@@ -60,8 +60,8 @@ class TestParaphrase(unittest.TestCase):
         for prompt in TRUTHFUL_DATASET:
             sim_prompt = self.perturber.perturb(prompt)
             error_msg = (
-                f'Expected {self.num_sentences} parphrases '
+                f'Expected {self.num_perturbations} parphrases '
                 f'received {len(sim_prompt)}'
             )
-            assert(len(sim_prompt)==self.num_sentences), error_msg
+            assert(len(sim_prompt)==self.num_perturbations), error_msg
         return

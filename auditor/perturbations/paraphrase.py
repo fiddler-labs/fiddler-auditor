@@ -14,14 +14,14 @@ class Paraphrase(AbstractPerturbation):
     def __init__(
         self,
         model: Optional[str] = OPENAI_CHAT_COMPLETION,
-        num_sentences: int = 5,
+        num_perturbations: int = 5,
         temperature: float = 0.0,
         api_key: Optional[str] = None,
         api_version: Optional[str] = None,
     ) -> None:
         self._init_key(api_key)
         self._init_model(model, api_version)
-        self.num_sentences = num_sentences
+        self.num_perturbations = num_perturbations
         self.temperature = temperature
         self.descriptor = (
             f'Paraphrases the original prompt with '
@@ -64,7 +64,7 @@ class Paraphrase(AbstractPerturbation):
         prompt: str,
     ) -> List[str]:
         prompt = self.paraphrase_instruction.format(
-            n=self.num_sentences,
+            n=self.num_perturbations,
             sentence=prompt
         )
         payload = [
