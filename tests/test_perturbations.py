@@ -1,11 +1,8 @@
 import unittest
 
-import spacy
-
-from auditor.perturbations import PerturbText, Paraphrase
+from auditor.perturbations import PerturbText, Paraphrase, TransformBase
 from .validation_utils import get_ner_pipeline
 
-from .validation_utils import get_ner_pipeline
 
 INTENT_DATASET = [
     "please call michael",
@@ -58,10 +55,24 @@ class TestParaphrase(unittest.TestCase):
     
     def test_paraphrase(self):
         for prompt in TRUTHFUL_DATASET:
-            sim_prompt = self.perturber.perturb(prompt)
+            sim_prompt = self.perturber.transform(prompt)
             error_msg = (
                 f'Expected {self.num_perturbations} parphrases '
                 f'received {len(sim_prompt)}'
             )
             assert(len(sim_prompt)==self.num_perturbations), error_msg
+        return
+
+class TestTransformBase(unittest.TestCase):
+    def test_init(self) -> None:
+        """Testing initalization of TransformBase
+        """
+        class TestTransform(TransformBase):
+            def __init__(self) -> None:
+                self.dummy_var = None
+        try:
+            test_inheritance = TestTransform()
+        except TypeError:
+            # expected error
+            pass
         return

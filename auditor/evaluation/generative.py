@@ -11,7 +11,7 @@ from auditor.evaluation.expected_behavior import (
 )
 from auditor.utils.logging import get_logger
 from auditor.perturbations import Paraphrase
-from auditor.perturbations.base import AbstractPerturbation
+from auditor.perturbations import TransformBase
 
 LOG = get_logger(__name__)
 
@@ -21,7 +21,7 @@ class LLMEval:
         self,
         llm:  BaseLLM,
         expected_behavior: SimilarGeneration,
-        perturber: Optional[AbstractPerturbation] = None,
+        transformation: Optional[TransformBase] = None,
     ) -> None:
         """Class for evaluating Large Language Models (LLMs)
 
@@ -29,20 +29,22 @@ class LLMEval:
             llm (BaseLLM): Langchain LLM Object
             expected_behavior (SimilarGeneration):
                 Expected model behavior to evaluate against
+            transformation (Optional[TransformBase], optional):
+                Transformation to evaluate against.
+                When not provided defaults to using auditor.perturbations.Paraphrase.  # noqa: E501
         """
         self.llm = llm
         self.expected_behavior = expected_behavior
-        if perturber is None:
-            self.perturber = Paraphrase()
+        if transformation is None:
+            self.transformation = Paraphrase()
         else:
-            self.perturber = perturber
+            self.transformation = transformation
         return
 
     def _evaluate_generations(
         self,
         prompt: str,
         evaluation_type: Literal[LLMEvalType.robustness, LLMEvalType.correctness],  # noqa: E501
-        perturbations_per_sample: int = 5,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         reference_generation: Optional[str] = None,
@@ -57,8 +59,6 @@ class LLMEval:
             prompt (str): Prompt to be perturbed
             evaluation_type (LLMEvalType): Evaluation type. Supported types -
             Robustness or Correctness.
-            perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -174,7 +174,7 @@ class LLMEval:
             Returns:
             List[str]: List of perturbed prompts.
         """
-        return self.perturber.perturb(
+        return self.transformation.transform(
             prompt,
             *args,
             **kwargs,
@@ -194,7 +194,7 @@ class LLMEval:
     def evaluate_prompt_robustness(
         self,
         prompt: str,
-        perturbations_per_sample: int = 5,
+        perturbations_per_sample: Optional[int] = None,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         prompt_perturbations: Optional[List[str]] = None,
@@ -207,7 +207,8 @@ class LLMEval:
         Args:
             prompt (str): Prompt to be perturbed
             perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
+                Deprecated. No of perturbation is now controlled by the
+                Transform object.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -224,7 +225,6 @@ class LLMEval:
         return self._evaluate_generations(
             prompt=prompt,
             evaluation_type=LLMEvalType.robustness,
-            perturbations_per_sample=perturbations_per_sample,
             pre_context=pre_context,
             post_context=post_context,
             reference_generation=None,
@@ -237,7 +237,7 @@ class LLMEval:
         self,
         prompt: str,
         reference_generation: str,
-        perturbations_per_sample: int = 5,
+        perturbations_per_sample: Optional[int] = None,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         alternative_prompts: Optional[List[str]] = None,
@@ -252,7 +252,8 @@ class LLMEval:
             reference_generation (str):
                 Reference generation to compare against.
             perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
+                Deprecated. No of perturbation is now controlled by the
+                Transform object.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -269,7 +270,6 @@ class LLMEval:
         return self._evaluate_generations(
             prompt=prompt,
             evaluation_type=LLMEvalType.correctness,
-            perturbations_per_sample=perturbations_per_sample,
             pre_context=pre_context,
             post_context=post_context,
             reference_generation=reference_generation,

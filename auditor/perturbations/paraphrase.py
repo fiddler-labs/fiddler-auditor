@@ -4,11 +4,11 @@ import re
 
 import openai
 
-from auditor.perturbations.base import AbstractPerturbation
+from auditor.perturbations.base import TransformBase
 from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
 
 
-class Paraphrase(AbstractPerturbation):
+class Paraphrase(TransformBase):
     """Perturbation class that paraphrases by querying open-ai LLM
     """
     def __init__(
@@ -59,7 +59,7 @@ class Paraphrase(AbstractPerturbation):
             self.engine = None
         return
 
-    def perturb(
+    def transform(
         self,
         prompt: str,
     ) -> List[str]:
