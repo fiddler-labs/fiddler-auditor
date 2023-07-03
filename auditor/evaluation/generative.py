@@ -1,5 +1,4 @@
 from typing import List, Optional, Literal, Dict
-from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
 
 from langchain.llms.base import BaseLLM
 
@@ -11,7 +10,8 @@ from auditor.evaluation.expected_behavior import (
     SimilarGeneration,
 )
 from auditor.utils.logging import get_logger
-from auditor.perturbations.text import PerturbText
+from auditor.perturbations import Paraphrase
+from auditor.perturbations import TransformBase
 
 LOG = get_logger(__name__)
 
@@ -21,6 +21,7 @@ class LLMEval:
         self,
         llm:  BaseLLM,
         expected_behavior: SimilarGeneration,
+        transformation: Optional[TransformBase] = None,
     ) -> None:
         """Class for evaluating Large Language Models (LLMs)
 
@@ -28,22 +29,28 @@ class LLMEval:
             llm (BaseLLM): Langchain LLM Object
             expected_behavior (SimilarGeneration):
                 Expected model behavior to evaluate against
+            transformation (Optional[TransformBase], optional):
+                Transformation to evaluate against.
+                When not provided defaults to using auditor.perturbations.Paraphrase.  # noqa: E501
         """
         self.llm = llm
         self.expected_behavior = expected_behavior
+        if transformation is None:
+            self.transformation = Paraphrase()
+        else:
+            self.transformation = transformation
         return
 
     def _evaluate_generations(
         self,
         prompt: str,
         evaluation_type: Literal[LLMEvalType.robustness, LLMEvalType.correctness],  # noqa: E501
-        perturbations_per_sample: int = 5,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         reference_generation: Optional[str] = None,
         prompt_perturbations: Optional[List[str]] = None,
-        model: Optional[str] = OPENAI_CHAT_COMPLETION,
-        api_version: Optional[str] = None,
+        *args,
+        **kwargs,
     ) -> LLMEvalResult:
         """
         Evaluates generations to paraphrased prompt perturbations
@@ -52,8 +59,6 @@ class LLMEval:
             prompt (str): Prompt to be perturbed
             evaluation_type (LLMEvalType): Evaluation type. Supported types -
             Robustness or Correctness.
-            perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -65,9 +70,6 @@ class LLMEval:
             prompt_perturbations (Optional[List[str]], optional):
                 Alternative prompts to use. Defaults to None. When absent,
                 method generates perturbations by paraphrasing the prompt.
-            model (str, optional): Model to use for paraphrasing.
-                Defaults to ''gpt-3.5-turbo'.
-            api_version(str, optional): openai API version.
 
         Returns:
             LLMEvalResult: Object wth evaluation results
@@ -87,9 +89,8 @@ class LLMEval:
         if prompt_perturbations is None:
             prompt_perturbations = self.generate_alternative_prompts(
                 prompt=prompt,
-                perturbations_per_sample=perturbations_per_sample,
-                model=model,
-                api_version=api_version,
+                *args,
+                **kwargs,
             )
         # include the original prompt when evaluating correctness
         if evaluation_type.value == LLMEvalType.correctness.value:
@@ -163,41 +164,21 @@ class LLMEval:
     def generate_alternative_prompts(
         self,
         prompt: str,
-        perturbations_per_sample: int,
-        temperature: Optional[float] = 0.0,
-        return_original: Optional[bool] = False,
-        model: Optional[str] = OPENAI_CHAT_COMPLETION,
-        api_version: Optional[str] = None,
+        *args,
+        **kwargs,
     ) -> List[str]:
-        """Generates paraphrased prompts.
+        """Generates perturbed prompts
 
         Args:
             prompt (str): Prompt to be perturbed
-            perturbations_per_sample (int): No of paraphrases to generate
-            temperature (Optional[float], optional): Temperaure for
-                generations. Defaults to 0.0
-            return_original (Optional[bool], optional): If True original prompt
-                is returned as the first entry in the list. Defaults to False.
-            model (str, optional): Model to use for paraphrasing.
-                Defaults to ''gpt-3.5-turbo'.
-            api_version(str, optional): openai API version.
-        Returns:
-            List[str]: List of paraphrased prompts.
+            Returns:
+            List[str]: List of perturbed prompts.
         """
-        perturber = PerturbText(
-            [prompt],
-            ner_pipeline=None,
-            batch_size=1,
-            perturbations_per_sample=perturbations_per_sample,
+        return self.transformation.transform(
+            prompt,
+            *args,
+            **kwargs,
         )
-        # TODO: Add perturbation types
-        perturbed_dataset = perturber.paraphrase(temperature=temperature,
-                                                 model=model,
-                                                 api_version=api_version)
-        if return_original:
-            return perturbed_dataset.data[0]
-        else:
-            return perturbed_dataset.data[0][1:]
 
     def _get_generation_details(self) -> Dict[str, str]:
         """Returns generation related details"""
@@ -213,12 +194,12 @@ class LLMEval:
     def evaluate_prompt_robustness(
         self,
         prompt: str,
-        perturbations_per_sample: int = 5,
+        perturbations_per_sample: Optional[int] = None,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         prompt_perturbations: Optional[List[str]] = None,
-        model: Optional[str] = OPENAI_CHAT_COMPLETION,
-        api_version: Optional[str] = None,
+        *args,
+        **kwargs,
     ) -> LLMEvalResult:
         """
         Evaluates robustness of generation to paraphrased prompt perturbations
@@ -226,7 +207,8 @@ class LLMEval:
         Args:
             prompt (str): Prompt to be perturbed
             perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
+                Deprecated. No of perturbation is now controlled by the
+                Transform object.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -236,9 +218,6 @@ class LLMEval:
             prompt_perturbations (Optional[List[str]], optional):
                 Prompt perturbations to use. Defaults to None. When absent,
                 method generates perturbations by paraphrasing the prompt.
-            model (str, optional): Model to use for paraphrasing.
-                Defaults to ''gpt-3.5-turbo'.
-            api_version (str, optional): openai API version.
 
         Returns:
             LLMEvalResult: Object wth evaluation results
@@ -246,25 +225,24 @@ class LLMEval:
         return self._evaluate_generations(
             prompt=prompt,
             evaluation_type=LLMEvalType.robustness,
-            perturbations_per_sample=perturbations_per_sample,
             pre_context=pre_context,
             post_context=post_context,
             reference_generation=None,
             prompt_perturbations=prompt_perturbations,
-            model=model,
-            api_version=api_version,
+            *args,
+            **kwargs,
         )
 
     def evaluate_prompt_correctness(
         self,
         prompt: str,
         reference_generation: str,
-        perturbations_per_sample: int = 5,
+        perturbations_per_sample: Optional[int] = None,
         pre_context: Optional[str] = None,
         post_context: Optional[str] = None,
         alternative_prompts: Optional[List[str]] = None,
-        model: Optional[str] = OPENAI_CHAT_COMPLETION,
-        api_version: Optional[str] = None,
+        *args,
+        **kwargs,
     ) -> LLMEvalResult:
         """
         Evaluates robustness of generation to paraphrased prompt perturbations
@@ -274,7 +252,8 @@ class LLMEval:
             reference_generation (str):
                 Reference generation to compare against.
             perturbations_per_sample (int, optional):
-                No of perturbations to generate for the prompt. Defaults to 5.
+                Deprecated. No of perturbation is now controlled by the
+                Transform object.
             pre_context (Optional[str], optional):
                 Context prior to prompt, will not be perturbed.
                 Defaults to None.
@@ -284,9 +263,6 @@ class LLMEval:
             alternative_prompts (Optional[List[str]], optional):
                 Alternative prompts to use. Defaults to None. When provided no
                 perturbations are generated.
-            model (str, optional): Model to use for paraphrasing.
-                Defaults to ''gpt-3.5-turbo'.
-            api_version (str, optional): openai API version
 
         Returns:
             LLMEvalResult: Object wth evaluation results
@@ -294,11 +270,10 @@ class LLMEval:
         return self._evaluate_generations(
             prompt=prompt,
             evaluation_type=LLMEvalType.correctness,
-            perturbations_per_sample=perturbations_per_sample,
             pre_context=pre_context,
             post_context=post_context,
             reference_generation=reference_generation,
             prompt_perturbations=alternative_prompts,
-            model=model,
-            api_version=api_version,
+            *args,
+            **kwargs,
         )

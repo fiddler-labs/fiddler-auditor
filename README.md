@@ -60,8 +60,9 @@ pip install .
 ```
 
 ## Quick-start guides
-- [Evaluate LLM Correctness and Robustness](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb) 
-- [Evaluate LLMs with custom metrics](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb)
+- [Evaluate LLM Correctness and Robustness](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
+- [Evaluate LLMs with custom metrics](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb)
+- [Prompt injection attack with custom transformation](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Transformation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Transformation.ipynb)
 
 
 ## Contribution
