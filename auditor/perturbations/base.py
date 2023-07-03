@@ -16,21 +16,21 @@ class TransformBase(ABC):
         )
 
         class PromptInjection(TransformBase):
-        def __init__(self, injection_directive):
-            self.paraphrase = Paraphrase()
-            self.injection_directive = injection_directive
-            return
+            def __init__(self, injection_directive):
+                self.paraphrase = Paraphrase()
+                self.injection_directive = injection_directive
+                return
 
-        def perturb(self, prompt) -> List[str]:
-            perturbations = self.paraphrase.perturb(prompt)
-            return [p + self.injection_directive for p in perturbations]
+            def perturb(self, prompt) -> List[str]:
+                perturbations = self.paraphrase.perturb(prompt)
+                return [p + self.injection_directive for p in perturbations]
 
-        def description(self) -> str:
-            return (
-                f'Prompt Injection attack: Appends the instruction \n'
-                f'{self.injection_directive} \n'
-                f'at the end of the prompt.'
-            )
+            def description(self) -> str:
+                return (
+                    f'Prompt Injection attack: Appends the instruction \n'
+                    f'{self.injection_directive} \n'
+                    f'at the end of the prompt.'
+                )
 
         injector = PromptInjection(injection_directive=office_directive)
     """
@@ -45,7 +45,8 @@ class TransformBase(ABC):
         **kwargs,
     ) -> List[str]:
         """Method to generate transformations. The method must accept an
-        argument 'prompt' of string type.
+        argument 'prompt' of string type and must return a list of
+        transformed prompts.
 
         Raises:
             NotImplementedError: Raised when derived class has not implement
@@ -61,6 +62,6 @@ class TransformBase(ABC):
     @abstractproperty
     def description(self) -> str:
         """Derived calss must return a string describing the
-         transofrmation.
+         transformation.
         """
         pass
