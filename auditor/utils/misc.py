@@ -45,11 +45,11 @@ def simulate_typos(sentence: str, typo_probability: float) -> str:
     outputList = []
 
     # the positions of eligible of characters that can have typos
-    eligible_positions=[]
+    eligible_positions = []
     for pos in range(0, len(charList)):
         if charList[pos] in KEYS_MAP:
-           eligible_positions.append(pos) 
-    
+            eligible_positions.append(pos)
+
     n_chars_to_flip = math.ceil(len(charList) * typo_probability)
 
     # list of characters that will be flipped
