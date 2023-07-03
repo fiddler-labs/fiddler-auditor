@@ -36,6 +36,9 @@ class TestPerturbText(unittest.TestCase):
 
     def test_perturb_number(self):
         print(self.perturber.perturb_number())
+
+    def test_perturb_typos(self):
+        print(self.perturber.perturb_typos(typo_probability = 0.05))
     
     def test_paraphrase(self):
         similar_sentences = self.perturber.paraphrase(
