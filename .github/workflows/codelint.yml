@@ -1,6 +1,8 @@
-name: codelint
+name: Lint check
 
 on:
+  schedule:
+    - cron: '30 7 * * *'
   push:
     branches: [master]
   pull_request:
