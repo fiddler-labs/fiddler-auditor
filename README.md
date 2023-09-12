@@ -76,4 +76,4 @@ We are continuously updating this library to support language models as they evo
 - Discover the latest guides, videos, and research with the [Fiddler Resources Library](https://www.fiddler.ai/resources)
 - Stay informed by following us on [Twitter](https://twitter.com/fiddlerlabs)
 - Subscribe to our [monthly newsletter](https://www.fiddler.ai/blog#subscribe)
-- [Try Fiddler for free](https://www.fiddler.ai/trial)
+- [Request a demo](https://www.fiddler.ai/demo)
