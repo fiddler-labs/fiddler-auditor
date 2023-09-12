@@ -2,8 +2,8 @@
 
 Auditing Large Language Models made easy!
 
-<!-- [![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
-[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml) -->
+<!-- [![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
+[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml) -->
 
 
 ## What is Fiddler Auditor?

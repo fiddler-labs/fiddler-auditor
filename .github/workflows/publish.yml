@@ -17,16 +17,16 @@ jobs:
     - name: Upgrade pip
       run: |
         python -m pip install --upgrade pip
-    - name: Install Jupyter
-      run: |
-        which pip
-        which python
-        python -c "import sys; print(sys.executable)"
-        pip install wheel
-        pip install jupyter
-    - name: Install Checklist
-      run: |    
-        pip install --no-build-isolation checklist==0.0.11
+    # - name: Install Jupyter
+    #   run: |
+    #     which pip
+    #     which python
+    #     python -c "import sys; print(sys.executable)"
+    #     pip install wheel
+    #     pip install jupyter
+    # - name: Install Checklist
+    #   run: |    
+    #     pip install --no-build-isolation checklist==0.0.11
     - name: Install package
       run: |
         pip install .[test]

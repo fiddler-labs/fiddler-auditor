@@ -1,4 +1,4 @@
-name: Test
+name: Auditor CI
 
 on:
   schedule:
