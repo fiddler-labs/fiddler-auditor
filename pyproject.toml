@@ -37,6 +37,8 @@ repository = "https://github.com/fiddler-labs/fiddler-auditor"
 [project.optional-dependencies]
 test =[
   "pytest",
+  "build",
+  "twine",
 ]
 
 [tool.setuptools.package-data]
