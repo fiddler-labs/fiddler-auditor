@@ -19,7 +19,7 @@ classifiers = [
 ]
 dependencies = [
     "notebook >=6.0.1",
-    "checklist@git+https://github.com/fiddler-labs/checklist",
+    "fiddler-checklist==0.0.1",
     "pandas >=1.3.5,<2.0",
     "spacy-transformers >=1.1.8",
     "jinja2==3.1.2",
@@ -37,6 +37,8 @@ repository = "https://github.com/fiddler-labs/fiddler-auditor"
 [project.optional-dependencies]
 test =[
   "pytest",
+  "build",
+  "twine",
 ]
 
 [tool.setuptools.package-data]
