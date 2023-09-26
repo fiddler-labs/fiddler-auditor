@@ -159,8 +159,11 @@ class SimilarGeneration(AbstractBehavior):
 
     def check(
         self,
+        prompt: str,
         perturbed_generations: List[str],
         reference_generation: str,
+        pre_context: Optional[str],
+        post_context: Optional[str],
     ) -> List[Tuple[bool, Dict[str, float]]]:
         test_results = []
         for peturbed_gen in perturbed_generations:

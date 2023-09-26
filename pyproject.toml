@@ -39,6 +39,7 @@ test =[
   "pytest",
   "build",
   "twine",
+  "flake8",
 ]
 
 [tool.setuptools.package-data]
