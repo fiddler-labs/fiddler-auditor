@@ -15,6 +15,7 @@ from auditor.evaluation.expected_behavior import (
 )
 from auditor.reporting import generate_robustness_report
 from auditor.utils.logging import get_logger
+from auditor.utils.progress_logger import ProgressLogger
 
 LOG = get_logger(__name__)
 
@@ -90,6 +91,8 @@ class ModelTest:
             f'Started model evaluation with perturbation type '
             f'{self.perturbed_dataset.perturbation_type}'
         )
+        progress_bar = ProgressLogger(total_steps=min(len(self.perturbed_dataset.data), len(self.perturbed_dataset.metadata)), description="Starting Model Evaluation")
+
         for perturbed_samples, metadata_samples in zip(
             self.perturbed_dataset.data, self.perturbed_dataset.metadata
         ):
@@ -126,12 +129,14 @@ class ModelTest:
                         metadata=mdata,
                     )
                 )
+            progress_bar.update()
         robust_accuracy = self.compute_accuracy(test_results)
         LOG.info(f'Robust Accuracy: {robust_accuracy*100.}')
         LOG.info(
             'Completed model evaluation with perturbation type '
             f'{self.perturbed_dataset.perturbation_type}'
         )
+        progress_bar.close()
         self.test_results = TestSummary(
             results=test_results,
             robust_accuracy=robust_accuracy,

@@ -4,6 +4,7 @@ from typing import List, Tuple, Optional, Dict
 import numpy as np
 from sentence_transformers.SentenceTransformer import SentenceTransformer
 
+from auditor.utils.progress_logger import ProgressLogger
 from auditor.utils.similarity import compute_similarity
 from auditor.utils.logging import get_logger
 
@@ -163,6 +164,8 @@ class SimilarGeneration(AbstractBehavior):
         reference_generation: str,
     ) -> List[Tuple[bool, Dict[str, float]]]:
         test_results = []
+        progress_bar = ProgressLogger(total_steps=len(perturbed_generations), description="Fetching Scores")
+
         for peturbed_gen in perturbed_generations:
             try:
                 score = compute_similarity(
@@ -178,9 +181,13 @@ class SimilarGeneration(AbstractBehavior):
                     self.similarity_metric_key: round(score, ndigits=2)
                 }
                 test_results.append((test_status, score_dict))
+                progress_bar.update()
             except Exception as e:
                 LOG.error('Unable to complete semanatic similarity checks')
+                progress_bar.close()
                 raise e
+
+        progress_bar.close()
         return test_results
 
     def behavior_description(self):
