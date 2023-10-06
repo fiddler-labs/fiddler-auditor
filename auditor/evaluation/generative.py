@@ -12,6 +12,7 @@ from auditor.evaluation.expected_behavior import (
 from auditor.utils.logging import get_logger
 from auditor.perturbations import Paraphrase
 from auditor.perturbations import TransformBase
+from auditor.utils.progress_logger import ProgressLogger
 
 LOG = get_logger(__name__)
 
@@ -98,6 +99,9 @@ class LLMEval:
         else:
             evaluate_prompts = prompt_perturbations
 
+        progress_bar = ProgressLogger(total_steps=len(evaluate_prompts),
+                                      description="Applying Perturbations")
+
         # generations for each of the perturbed prompts
         alternative_generations = []
         for alt_prompt in evaluate_prompts:
@@ -107,6 +111,9 @@ class LLMEval:
                 post_context,
             )
             alternative_generations.append(resp)
+            progress_bar.update()
+
+        progress_bar.close()
 
         # create test result
         metric = self.expected_behavior.check(
