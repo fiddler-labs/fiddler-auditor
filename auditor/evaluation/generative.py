@@ -99,7 +99,8 @@ class LLMEval:
         else:
             evaluate_prompts = prompt_perturbations
 
-        progress_bar = ProgressLogger(total_steps=len(evaluate_prompts), description="Applying Perturbations")
+        progress_bar = ProgressLogger(total_steps=len(evaluate_prompts),
+                                      description="Applying Perturbations")
 
         # generations for each of the perturbed prompts
         alternative_generations = []

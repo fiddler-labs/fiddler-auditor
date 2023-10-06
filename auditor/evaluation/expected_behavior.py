@@ -164,7 +164,8 @@ class SimilarGeneration(AbstractBehavior):
         reference_generation: str,
     ) -> List[Tuple[bool, Dict[str, float]]]:
         test_results = []
-        progress_bar = ProgressLogger(total_steps=len(perturbed_generations), description="Fetching Scores")
+        progress_bar = ProgressLogger(total_steps=len(perturbed_generations),
+                                      description="Fetching Scores")
 
         for peturbed_gen in perturbed_generations:
             try:

@@ -1,7 +1,9 @@
 import tqdm
 
+
 class ProgressLogger:
     """class to show progress bar"""
+
     def __init__(self, total_steps, description="Logging..."):
         self.total_steps = total_steps
         self.description = description
