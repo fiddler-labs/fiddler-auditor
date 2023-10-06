@@ -91,7 +91,10 @@ class ModelTest:
             f'Started model evaluation with perturbation type '
             f'{self.perturbed_dataset.perturbation_type}'
         )
-        progress_bar = ProgressLogger(total_steps=min(len(self.perturbed_dataset.data), len(self.perturbed_dataset.metadata)), description="Starting Model Evaluation")
+        progress_bar = ProgressLogger(
+            total_steps=min(len(self.perturbed_dataset.data), len(self.perturbed_dataset.metadata)),
+            description="Starting Model Evaluation"
+        )
 
         for perturbed_samples, metadata_samples in zip(
             self.perturbed_dataset.data, self.perturbed_dataset.metadata
