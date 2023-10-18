@@ -1,6 +1,7 @@
 PYTHONPATH := $(shell dirname $(realpath $(firstword $(MAKEFILE_LIST))))
 
 test:
+	python -m spacy download en_core_web_trf
 	python -m pytest -s -v  tests/
 
 build:
