@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod, abstractproperty
 from typing import List, Tuple, Optional, Dict
 import re
 import httplib2
-import warnings
 
 import numpy as np
 from sentence_transformers.SentenceTransformer import SentenceTransformer
@@ -339,6 +338,69 @@ class Toxicity(AbstractBehavior):
         else:
             test_status = PASSED_TEST
         return toxic_score, test_status
+
+    def behavior_description(self):
+        return self.descriptor
+
+
+class ValidURL(AbstractBehavior):
+    """
+    Grading reponses from a model with a larger model.
+    """
+    def __init__(
+        self,
+        metric_key: str = 'Invalid URLs',
+    ) -> None:
+        self.metric_key = metric_key
+        self.descriptor = (
+            'Check if the model response contains valid URL.'
+        )
+        return
+
+    def check(
+        self,
+        prompt: str,
+        perturbed_generations: List[str],
+        reference_generation: str,
+        pre_context: Optional[str],
+        post_context: Optional[str],
+    ) -> List[Tuple[bool, Dict[str, float]]]:
+        test_results = []
+        for peturbed_gen in perturbed_generations:
+            try:
+                error, test_status = self._grade(
+                    peturbed_gen,
+                )
+                score_dict = {
+                    self.metric_key: error,
+                }
+                test_results.append((test_status, score_dict))
+            except Exception as e:
+                # LOG.error('Unable to complete semanatic similarity checks')
+                raise e
+        return test_results
+
+    def _grade(
+        self,
+        perturbed_generation: str,
+    ):
+        invalid_urls = []
+        h = httplib2.Http()
+        # Extract list of URLs from the str
+        urls = re.findall(r'(https?://\S+)', perturbed_generation)
+        # test each url by requesting their header
+        for url in urls:
+            try:
+                resp = h.request(url, 'HEAD')
+                if (int(resp[0]['status']) > 399):
+                    invalid_urls.append(url)
+            except Exception:
+                invalid_urls.append(url)
+        if len(invalid_urls) > 0:
+            test_status = FAILED_TEST
+        else:
+            test_status = PASSED_TEST
+        return str(invalid_urls), test_status
 
     def behavior_description(self):
         return self.descriptor

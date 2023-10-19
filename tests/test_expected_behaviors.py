@@ -5,7 +5,7 @@ from sentence_transformers.SentenceTransformer import SentenceTransformer
 
 from auditor.evaluation.evaluate import LLMEval
 from auditor.evaluation.expected_behavior import (
-    ModelGraded, SimilarGeneration, Toxicity
+    ModelGraded, SimilarGeneration, Toxicity, ValidURL
 )
 from .validation_utils import get_test_data
 
@@ -38,6 +38,11 @@ class TestModelEval(unittest.TestCase):
         return
 
     def test_valid_url(self):
+        kwargs = TEST_DATA['ValidURL']
+        url_check = ValidURL()
+        result = url_check.check(**kwargs)
+        grade = [r[0] for r in result]
+        assert sum(grade)==1, 'Expected exactly 1/2 result to be invalid.'
         return
     
     def test_toxicity(self):
@@ -45,7 +50,5 @@ class TestModelEval(unittest.TestCase):
         toxicity_check = Toxicity(threshold=0.6)
         result = toxicity_check.check(**kwargs)
         grade = [r[0] for r in result]
-        print(result)
         assert sum(grade)==1, 'Expected exactly 1/2 result to be toxic.'
-        return
         return
