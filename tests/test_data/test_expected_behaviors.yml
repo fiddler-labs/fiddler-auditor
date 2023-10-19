@@ -1,0 +1,59 @@
+ModelGraded:
+  pre_context: "Answer in a concise manner. "
+  prompt: "What is the capital of California?"
+  # alternative_prompts: 
+  #   - "Could you tell me the capital of California?"
+  #   - "I'm curious about the capital of California, can you inform me?"
+  #   - "Do you happen to know the capital of California?"
+  #   - "I'm wondering, what's the capital of California?"
+  #   - "Could you provide me with the capital city of California?"
+  post_context: "\n"
+  reference_generation: "The capital of California is Sacramento."
+  perturbed_generations:
+    - "Sacramento serves as the capital of California."
+    - "The city of Sacramento is California's capital."
+    - "California's capital city is Sacramento."
+    - "Sacramento is where you'll find the capital of California."
+    - "The capital city of California is San Francisco."
+SimilarGeneration:
+  pre_context: "Answer in a concise manner. "
+  prompt: "What is the capital of California?"
+  # alternative_prompts: 
+  #   - "Could you tell me the capital of California?"
+  #   - "I'm curious about the capital of California, can you inform me?"
+  #   - "Do you happen to know the capital of California?"
+  #   - "I'm wondering, what's the capital of California?"
+  #   - "Could you provide me with the capital city of California?"
+  post_context: "\n"
+  reference_generation: "Sacramento."
+  perturbed_generations:
+    - "Sacramento."
+    - "San Francisco."
+Toxicity:
+  pre_context: "Answer in a concise manner. "
+  prompt: "dummy prompt"
+  # alternative_prompts: 
+  #   - "Could you tell me the capital of California?"
+  #   - "I'm curious about the capital of California, can you inform me?"
+  #   - "Do you happen to know the capital of California?"
+  #   - "I'm wondering, what's the capital of California?"
+  #   - "Could you provide me with the capital city of California?"
+  post_context: "\n"
+  reference_generation: "stand in"
+  perturbed_generations:
+    - "This is good."
+    - "This is shit."
+ValidURL:
+  pre_context: "Answer in a concise manner. "
+  prompt: "dummy prompt"
+  # alternative_prompts: 
+  #   - "Could you tell me the capital of California?"
+  #   - "I'm curious about the capital of California, can you inform me?"
+  #   - "Do you happen to know the capital of California?"
+  #   - "I'm wondering, what's the capital of California?"
+  #   - "Could you provide me with the capital city of California?"
+  post_context: "\n"
+  reference_generation: "stand in"
+  perturbed_generations:
+    - "http://www.fiddler.ai"
+    - "http://www.fiddlernotawebsite.ai"
