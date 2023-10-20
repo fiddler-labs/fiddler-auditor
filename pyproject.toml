@@ -26,7 +26,8 @@ dependencies = [
     "langchain >=0.0.158",
     "openai >=0.27.0",
     "sentence-transformers>=2.2.2",
-    "tqdm>=4.66.1"
+    "tqdm>=4.66.1",
+    "httplib2~=0.22.0"
 ]
 
 [project.license]

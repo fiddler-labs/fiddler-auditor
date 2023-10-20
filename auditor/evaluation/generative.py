@@ -117,6 +117,9 @@ class LLMEval:
 
         # create test result
         metric = self.expected_behavior.check(
+            prompt=prompt,
+            pre_context=pre_context,
+            post_context=post_context,
             reference_generation=reference_generation,
             perturbed_generations=alternative_generations,
         )
