@@ -251,7 +251,7 @@ class ModelGraded(AbstractBehavior):
                 # LOG.error('Unable to complete semanatic similarity checks')
                 progress_bar.close()
                 raise e
-        
+
         progress_bar.close()
         return test_results
 
