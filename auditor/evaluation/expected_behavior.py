@@ -11,6 +11,7 @@ from langchain.llms import OpenAI
 from auditor.utils.progress_logger import ProgressLogger
 from auditor.utils.similarity import compute_similarity
 from auditor.utils.logging import get_logger
+from auditor.utils.format import construct_llm_input
 
 FAILED_TEST = 0
 PASSED_TEST = 1
@@ -228,6 +229,10 @@ class ModelGraded(AbstractBehavior):
         post_context: Optional[str],
     ) -> List[Tuple[bool, Dict[str, float]]]:
         test_results = []
+        progress_bar = ProgressLogger(
+            total_steps=len(perturbed_generations),
+            description=f"Grading responses with {self.grading_model}"
+        )
         for peturbed_gen in perturbed_generations:
             try:
                 rationale, test_status = self._grade(
@@ -241,9 +246,13 @@ class ModelGraded(AbstractBehavior):
                     self.metric_key: rationale,
                 }
                 test_results.append((test_status, score_dict))
+                progress_bar.update()
             except Exception as e:
                 # LOG.error('Unable to complete semanatic similarity checks')
+                progress_bar.close()
                 raise e
+        
+        progress_bar.close()
         return test_results
 
     def _grade(
@@ -254,7 +263,11 @@ class ModelGraded(AbstractBehavior):
         pre_context: Optional[str],
         post_context: Optional[str],
     ):
-        query = pre_context + prompt + post_context
+        query = construct_llm_input(
+            prompt=prompt,
+            pre_context=pre_context,
+            post_context=post_context,
+        )
         grading_str = (
             f'Given the following context and question are the following two answers factually same?'  # noqa: E501
             f'If the reponses provide different details when asked a question they must be flagged as different.\n'  # noqa: E501
