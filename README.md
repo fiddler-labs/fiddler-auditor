@@ -2,8 +2,8 @@
 
 Auditing Large Language Models made easy!
 
-<!-- [![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
-[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml) -->
+[![lint](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/codelint.yml)
+[![test](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml/badge.svg?event=schedule)](https://github.com/fiddler-labs/fiddler-auditor/actions/workflows/test.yml)
 
 
 ## What is Fiddler Auditor?
@@ -60,7 +60,7 @@ pip install .
 ```
 
 ## Quick-start guides
-- [Evaluate LLM Correctness and Robustness](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
+- [Fiddler Auditor Quickstart](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/LLM_Evaluation.ipynb)
 - [Evaluate LLMs with custom metrics](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Evaluation.ipynb)
 - [Prompt injection attack with custom transformation](https://github.com/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Transformation.ipynb) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/fiddler-labs/fiddler-auditor/blob/main/examples/Custom_Transformation.ipynb)
 
@@ -70,6 +70,8 @@ We are continuously updating this library to support language models as they evo
 
 - Contributions in the form of suggestions and PRs to Fiddler Auditor are welcome!
 - If you encounter a bug, please feel free to raise issues in this repository.
+
+For step-by-step instructions follow the [Contrubution Guide](CONTRIBUTION.md).
 
 ## Community
 - For questions and support, join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
