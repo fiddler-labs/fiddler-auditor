@@ -1,6 +1,7 @@
 from typing import List, Optional
 import os
 import openai
+import litellm
 
 from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
 
@@ -37,7 +38,7 @@ def generate_similar_sentences(
         engine = model
         api_version = api_version
 
-    response = openai.ChatCompletion.create(
+    response = litellm.completion(
       model=model,
       messages=payload,
       temperature=temperature,
