@@ -3,6 +3,7 @@ import os
 import re
 
 import openai
+import litellm
 
 from auditor.perturbations.base import TransformBase
 from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
@@ -73,7 +74,7 @@ class Paraphrase(TransformBase):
                 "content": prompt
             }
         ]
-        response = openai.ChatCompletion.create(
+        response = litellm.completion(
             model=self.model,
             messages=payload,
             temperature=self.temperature,
