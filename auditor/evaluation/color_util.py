@@ -17,3 +17,4 @@ if __name__ == "__main__":
         print_in_dark_mode("This is a dark mode message.")
     else:
         print_in_light_mode("This is a light mode message.")
+        
