@@ -71,7 +71,7 @@ We are continuously updating this library to support language models as they evo
 - Contributions in the form of suggestions and PRs to Fiddler Auditor are welcome!
 - If you encounter a bug, please feel free to raise issues in this repository.
 
-For step-by-step instructions follow the [Contrubution Guide](CONTRIBUTION.md).
+For step-by-step instructions follow the [Contribution Guide](CONTRIBUTION.md).
 
 ## Community
 - For questions and support, join the [Fiddler Community](https://www.fiddler.ai/slackinvite)
