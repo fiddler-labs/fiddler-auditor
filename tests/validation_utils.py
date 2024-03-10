@@ -11,8 +11,8 @@ def get_ner_pipeline(model="en_core_web_trf"):
     except OSError:
         download(model)
         pipe = spacy.load(model).pipe
-    finally:
-        return pipe
+    
+    return pipe
 
 def get_test_data(test_file):
     test_yml = Path(str(Path(test_file).name).replace('.py', '.yml'))

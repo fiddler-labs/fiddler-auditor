@@ -1,52 +1,37 @@
 [build-system]
-requires = ["setuptools>=61.0"]
-build-backend = "setuptools.build_meta"
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
 
-[project]
-name = "fiddler-auditor"
+[tool.poetry]
+name = "auditor"
 version = "0.0.5"
-authors = [
-  { name="Fiddler Labs", email="support@fiddler.ai" },
-]
+authors = ["Fiddler Labs <support@fiddler.ai>"]
 description = "Auditing large language models made easy."
 readme = "README.md"
-requires-python = ">=3.8.1,<4.0"
-
-
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
-]
-dependencies = [
-    "notebook>=6.0.1",
-    "fiddler-checklist==0.0.1",
-    "pandas>=1.3.5,<2.0",
-    "spacy-transformers>=1.1.8",
-    "jinja2==3.1.2",
-    "langchain>=0.0.158,<=0.0.330",
-    "openai>=0.27.0,<=0.28.1",
-    "sentence-transformers>=2.2.2",
-    "tqdm>=4.66.1",
-    "httplib2~=0.22.0"
-]
-
-[project.license]
-text = "Elastic License 2.0 (ELv2)"
-
-[project.urls]
+license = "Elastic License 2.0 (ELv2)"
 repository = "https://github.com/fiddler-labs/fiddler-auditor"
 
-[project.optional-dependencies]
-test =[
-  "pytest",
-  "build",
-  "twine",
-  "flake8",
-]
+[tool.poetry.dependencies]
+python = ">=3.8.1,<4.0"
+notebook = "^6.0.1"
+fiddler-checklist = "^0.0.1"
+pandas = "^1.3.5"
+spacy-transformers = "^1.3.4"
+jinja2 = "3.1.2"
+langchain = "^0.1.11"
+openai = "^1.13.3"
+sentence-transformers = "^2.5.1"
+tqdm = "^4.66.1"
+httplib2 = "~0.22.0"
+langchain-openai = "^0.0.8"
 
-[tool.setuptools.package-data]
-"auditor.assets.data" = ["*.csv", "*.txt"]
-"auditor.reporting.templates" = ["report_template.html"]
+[tool.poetry.dev-dependencies]
+pytest = "*"
+build = "*"
+twine = "*"
+flake8 = "*"
 
-[tool.setuptools.packages.find]
-include = ["auditor*"]
+#[tool.poetry.package.include]
+#"auditor/assets/data/*.csv" = { format = "sdist" }
+#"auditor/assets/data/*.txt" = { format = "sdist" }
+#"auditor/reporting/templates/report_template.html" = { format = "sdist" }

@@ -6,7 +6,8 @@ import httplib2
 import numpy as np
 from sentence_transformers.SentenceTransformer import SentenceTransformer
 from transformers import pipeline
-from langchain.llms import OpenAI
+#from langchain_community.llms.openai import OpenAI
+from langchain_openai import ChatOpenAI
 
 from auditor.utils.progress_logger import ProgressLogger
 from auditor.utils.similarity import compute_similarity
@@ -213,7 +214,7 @@ class ModelGraded(AbstractBehavior):
         metric_key: str = 'Rationale',
     ) -> None:
         self.grading_model = grading_model
-        self.model = OpenAI(model_name=grading_model, temperature=0.0)
+        self.model = ChatOpenAI(model_name=grading_model, temperature=0.0)
         self.metric_key = metric_key
         self.descriptor = (
             f'Model response graded using {self.grading_model}.'
@@ -277,13 +278,14 @@ class ModelGraded(AbstractBehavior):
             f'Begin your response by providing the reason for your conclusion and avoid simply stating the correct answer.'  # noqa: E501
             f'End the response by printing only a single character "Y" or "N" on a separate line.'  # noqa: E501
         )
-        resp = self.model(grading_str)
+        resp = self.model.invoke(grading_str)
         return self._process_str(resp)
 
     def _process_str(
         self,
         resp: str
     ):
+        resp = resp.content
         rationale = resp.split('\n')[0]
         conclusion = resp.split('\n')[-1]
         if conclusion == 'Y':
