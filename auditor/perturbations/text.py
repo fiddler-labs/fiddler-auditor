@@ -300,7 +300,6 @@ class PerturbText:
         temperature: float = 0.0,
         api_key: Optional[str] = None,
         similarity_model: Optional[str] = None,
-        api_version: Optional[str] = None,
     ) -> PerturbedTextDataset:
         """Perturb the sentence by paraphrasing.
 
@@ -312,7 +311,6 @@ class PerturbText:
             api_key (str) : openai API key
             similarity_model : Model to use for scoring the similarity of
                 perturbations.
-            api_version (str, optional): openai API version
 
         Returns:
             PerturbedTextDataset: Perturbed dataset object
@@ -331,7 +329,6 @@ class PerturbText:
                 sentence=sentence,
                 api_key=api_key,
                 model=model,
-                api_version=api_version,
                 num_sentences=self.perturbations_per_sample,
                 temperature=temperature,
             )
