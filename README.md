@@ -45,6 +45,22 @@ Fiddler Auditor supports
 
 ## Installation
 
+### From Poetry
+Auditor supports the Poetry package management system and we test on Python 3.8 and above.  We recommend creating a virtual python environment using Poetry and installing using the following command
+
+```bash
+poetry install
+```
+This will install the dependencies listed in the pyproject.toml file and install the local virtual environment if Poetry is configured to do so.
+
+After installing, run the tests to confirm all dependencies are installed and fiddler-auditor is functioning.  
+```bash
+poetry run pytest -v -s
+```
+
+>**NOTE:** Run the above test command twice as the first time will trigger downloads of transformer assets and fail, but rerunning the tests should pass.
+
+
 ### From PyPI
 Auditor is available on PyPI and we test on Python 3.8 and above. We recommend creating a virtual python environment and installing using the following command
 
