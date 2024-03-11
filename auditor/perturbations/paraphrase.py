@@ -2,7 +2,7 @@ from typing import List, Optional
 import os
 import re
 
-import openai
+from openai import OpenAI
 
 from auditor.perturbations.base import TransformBase
 from auditor.perturbations.constants import OPENAI_CHAT_COMPLETION
@@ -40,8 +40,9 @@ class Paraphrase(TransformBase):
         """Initialize API key"""
         if api_key is None:
             api_key = os.getenv("OPENAI_API_KEY")
+        
         self.api_key = api_key
-        openai.api_key = api_key
+        self.client = OpenAI(api_key=api_key)
         return
 
     def _init_model(
@@ -52,11 +53,12 @@ class Paraphrase(TransformBase):
         """Initialize model, engine and api version"""
         self.model = model
         self.api_version = api_version
-        if openai.api_type == "azure":
-            self.engine = model
-            self.api_version = api_version
-        else:
-            self.engine = None
+        #if openai.api_type == "azure":
+        #    self.engine = model
+        #    self.api_version = api_version
+        #else:
+        #    self.engine = None
+        self.engine = None
         return
 
     def transform(
@@ -73,21 +75,19 @@ class Paraphrase(TransformBase):
                 "content": prompt
             }
         ]
-        response = openai.ChatCompletion.create(
+        response = self.client.chat.completions.create(
             model=self.model,
             messages=payload,
             temperature=self.temperature,
-            engine=self.engine,
-            api_version=self.api_version,
         )
         return Paraphrase._process_similar_sentence_reponse(response)
 
     @staticmethod
     def _process_similar_sentence_reponse(response):
-        generation = response['choices'][0]['message']['content']
+        generation = response.choices[0].message.content
         # Use a combination of lookahead and lookback
         # Expr extracts generations between the
-        # bulltet '-' and newline character
+        # bullet '-' and newline character
         sim_sent = re.findall(
             r'(?<=\n-)(.*?)(?=\n)',
             '\n'+generation+'\n'

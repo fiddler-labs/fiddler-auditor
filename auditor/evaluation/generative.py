@@ -150,7 +150,7 @@ class LLMEval:
                 pre_context,
                 post_context
             )
-            response = str(self.llm(llm_input))
+            response = str(self.llm.invoke(llm_input))
         except Exception as err:
             LOG.error('Unable to fetch generations from the model.')
             raise err
